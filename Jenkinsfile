@@ -2,8 +2,19 @@ pipeline {
   agent any
   stages {
     stage('TxWeb') {
-      steps {
-        build 'Tx_Web'
+      parallel {
+        stage('TxWeb') {
+          steps {
+            build 'Tx_Web'
+          }
+        }
+
+        stage('TxAPI') {
+          steps {
+            build 'Tx_API'
+          }
+        }
+
       }
     }
 
